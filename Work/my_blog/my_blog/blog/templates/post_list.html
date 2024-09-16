@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post List</title>
+</head>
+<body>
+    {% if blogs is empty %}
+        <li>No books available.</li>
+    {% else %}
+        {% for blog in blogs %}
+            <li>
+                <a href="{% url 'blog_detail' id=blog.id %}"><strong>{{ blog.title }}</strong></a>
+            </li>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
