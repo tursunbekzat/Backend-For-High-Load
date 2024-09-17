@@ -1,13 +1,14 @@
 from django.utils.text import slugify
 from django.db import models
-
+from django.contrib.auth.models import User
+from django.utils import timezone
 
 class Post(models.Model):
 
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, db_index=True, unique=True, blank=True)
     content = models.CharField(max_length=255)
-    author = models.CharField(max_length=255)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)  # Field for the comment author
     created_at = models.TimeField(auto_now_add=True)
     updated_at = models.TimeField(null=True, blank=True)
     
@@ -24,3 +25,13 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+    
+class Comment(models.Model):
+    text = models.TextField()  # Field for the comment text
+    author = models.ForeignKey(User, on_delete=models.CASCADE)  # Field for the comment author
+    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)  # Field for the related post
+    created_at = models.DateTimeField(default=timezone.now)  # Field for the created date
+
+    def __str__(self):
+        return f'Comment by {self.author} on {self.post}'
