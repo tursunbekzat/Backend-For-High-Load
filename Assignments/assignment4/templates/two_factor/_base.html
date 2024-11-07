@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Two-Factor Authentication{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Two-Factor Authentication</h1>
+            <p>Secure your account with an additional layer of security.</p>
+        </header>
+        <main>
+            {% block content %}
+            <!-- Content for two-factor views will be injected here -->
+            {% endblock %}
+        </main>
+    </div>
+</body>
+</html>

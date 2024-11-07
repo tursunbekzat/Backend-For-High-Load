@@ -1,0 +1,9 @@
+from django import forms
+
+from tasks.models import Email
+
+
+class EmailForm(forms.ModelForm):
+    class Meta:
+        model = Email
+        fields = ['recipient', 'subject', 'body']
