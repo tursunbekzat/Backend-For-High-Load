@@ -1,0 +1,23 @@
+<!-- post_detail.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ post.title }}</title>
+</head>
+<body>
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.content }}</p>
+    <p>By: {{ post.author.username }}</p>
+    <p>{{ post.created_date }}</p>
+
+    <h2>Comments</h2>
+    {% load cache %}
+    {% cache 60 recent_comments post.id %}
+        <ul>
+            {% for comment in comments %}
+                <li>{{ comment.content }} by {{ comment.author.username }} on {{ comment.created_date }}</li>
+            {% endfor %}
+        </ul>
+    {% endcache %}
+</body>
+</html>
